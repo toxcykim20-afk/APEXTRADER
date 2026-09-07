@@ -1,1 +1,48 @@
 
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ApexTrader</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+function toLogin(){
+ var n=document.getElementById('loginName').value;
+ if(n.length<2){alert('Enter your name');return;}
+ localStorage.setItem('apex_name',n);
+ document.getElementById('loginScreen').style.display='none';
+ document.getElementById('mainApp').style.display='flex';
+ document.getElementById('userNameTop').innerText=n;
+}
+function showPhase(p){
+ document.querySelectorAll('.phase').forEach(e=>e.style.display='none');
+ document.getElementById('phase-'+p).style.display='block';
+}
+</script>
+</head>
+<body class="bg-black text-white">
+<div id="loginScreen" style="position:fixed;inset:0;background:black;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px">
+ <div style="font-size:50px">₿↗</div><b style="font-size:24px;letter-spacing:3px">APEXTRADER</b>
+ <p style="opacity:0.5;font-size:11px;margin:10px 0 20px">DEMO ONLY - Min KSh 500</p>
+ <input id="loginName" placeholder="Amos Kimungetich" style="width:100%;background:#111;border:1px solid #333;padding:15px;border-radius:12px;color:white;margin-bottom:10px">
+ <input id="loginEmail" placeholder="Email" style="width:100%;background:#111;border:1px solid #333;padding:15px;border-radius:12px;color:white;margin-bottom:20px">
+ <button onclick="toLogin()" style="width:100%;background:white;color:black;padding:15px;border-radius:12px;font-weight:900">LOGIN →</button>
+</div>
+
+<div id="mainApp" style="display:none;flex-direction:column;min-height:100vh;max-width:430px;margin:0 auto">
+ <div style="padding:15px;background:#111;display:flex;justify-content:space-between"><b id="userNameTop">Guest</b><span>KSh 1,000</span></div>
+ <div id="phase-market" class="phase" style="padding:15px;flex:1"><h2>Popular Markets</h2><div style="margin-top:15px">
+  <div style="background:#111;padding:15px;border-radius:10px;margin-bottom:10px;display:flex;justify-content:space-between"><span>XAUUSD 4424</span><span style="color:#22c55e">▲ BUY</span></div>
+  <div style="background:#111;padding:15px;border-radius:10px;margin-bottom:10px;display:flex;justify-content:space-between"><span>BTCUSD 79842</span><span style="color:#ef4444">▼ SELL</span></div>
+  <div style="background:#111;padding:15px;border-radius:10px">EURUSD 1.1611</div>
+ </div></div>
+ <div id="phase-more" class="phase" style="display:none;padding:15px"><h2>More</h2>
+  <button onclick="alert('Economic Calendar - NFP Today 3:30 PM High')" style="width:100%;background:#0a84ff;padding:15px;border-radius:12px;margin-top:10px;text-align:left">📅 Economic Calendar</button>
+  <button onclick="alert('Profile: '+localStorage.getItem('apex_name'))" style="width:100%;background:#222;padding:15px;border-radius:12px;margin-top:10px;text-align:left">👤 Profile & Security</button>
+  <button onclick="alert('Settings - Dark mode ON')" style="width:100%;background:#222;padding:15px;border-radius:12px;margin-top:10px;text-align:left">⚙️ App settings</button>
+  <button onclick="alert('Live chat - Min deposit KSh 500')" style="width:100%;background:#222;padding:15px;border-radius:12px;margin-top:10px;text-align:left">🎧 Live Chat</button>
+  <button onclick="localStorage.clear();location.reload()" style="width:100%;background:#222;padding:15px;border-radius:12px;margin-top:10px">Logout</button>
+ </div>
+ <div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #222;padding:10px 0;text-align:center;font-size:12px">
+  <button onclick="showPhase('market')">📈<br>Trade</button><button onclick="showPhase('market')">📋<br>Positions</button><button onclick="showPhase('market')">💰<br>Funds</button><button onclick="showPhase('more')">⋯<br>More</button>
+ </div>
+</div>
+</body></html>
